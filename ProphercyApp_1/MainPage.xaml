@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             xmlns:viewmodels="clr-namespace:ProphercyApp_1.ViewModel"
+             x:DataType="viewmodels:MainViewModel"
+             x:Class="ProphercyApp_1.MainPage"             
+             Title="🔮 Передбачення"
+             BackgroundColor="#1a1a2e">
+
+    <ContentPage.BindingContext>
+        <viewmodels:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto, *, Auto, Auto">
+        <VerticalStackLayout Grid.Row="0"
+                             Spacing="5"
+                             Margin="0,0,0,20">
+            <Label Text="{Binding UserName, StringFormat='Вітаю, {0}!'}"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#aaa"
+                   HorizontalOptions="Center"/>
+            <Label Text="Дізнайся майбутнє!"
+                   FontSize="14"
+                   TextColor="#aaa"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <Frame Grid.Row="1"
+               BackgroundColor="#16213e"
+               BorderColor="#4a4a6a"
+               CornerRadius="15"
+               Padding="30"
+               HasShadow="True"
+               VerticalOptions="Center">
+            <VerticalStackLayout Spacing="20">
+                <Label Text="⭐"
+                       FontSize="60"
+                       HorizontalOptions="Center"/>
+                <Label Text="{Binding CurrentProphecy}"
+                       FontSize="18"
+                       TextColor="#eee"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <Button Grid.Row="2"
+                Text="🔮 Отримати передбачення"
+                Command="{Binding GenerateProphecyCommand}"
+                BackgroundColor="#9d4edd"
+                TextColor="#fff"
+                FontSize="18"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="60"
+                Margin="0,20,0,20"/>
+
+        <Grid Grid.Row="3" 
+              ColumnDefinitions="*,*"
+              ColumnSpacing="10">
+            <Button Grid.Column="0"
+                    Text="📜 Історія"
+                    Command="{Binding GoToHistoryCommand}"
+                    BackgroundColor="#3f4678"
+                    TextColor="#fff"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="45"/>
+            <Button Grid.Column="1"
+                    Text="🚪 Вийти"
+                    Command="{Binding LogoutCommand}"
+                    BackgroundColor="#450f61"
+                    TextColor="#fff"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="45"/>
+
+        </Grid>
+    </Grid>
+
+</ContentPage>

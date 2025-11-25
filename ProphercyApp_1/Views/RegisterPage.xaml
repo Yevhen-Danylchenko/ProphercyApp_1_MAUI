@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ProphercyApp_1.ViewModel"
+             x:Class="ProphercyApp_1.Views.RegisterPage"
+             Title="Реєстрація"
+             BackgroundColor="#1a1a2e">
+    <ContentPage.BindingContext>
+        <viewmodels:RegisterViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" 
+                             Padding="30"
+                             VerticalOptions="Center">
+            <Label Text="Створіть новий акаунт" 
+                   FontSize="24" 
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+            <Label Text="Приєднайся до нас." 
+                   FontSize="16" 
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+            <Frame BorderColor="#4a4a6a"
+                   CornerRadius="10"
+                   Padding="10"
+                   BackgroundColor="#16213e">
+                <Entry Placeholder="Ім'я" 
+                   Text="{Binding Name}" 
+                   TextColor="White"
+                   PlaceholderColor="Gray"/>
+            </Frame>
+            <Frame BorderColor="#4a4a6a"
+                   CornerRadius="10"
+                   Padding="10"
+                   BackgroundColor="#16213e">
+                <Entry Placeholder="Електронна пошта" 
+                   Text="{Binding Email}" 
+                   Keyboard="Email"
+                   TextColor="White"
+                   PlaceholderColor="Gray"/>
+            </Frame>
+            <Frame BorderColor="#4a4a6a"
+                   CornerRadius="10"
+                   Padding="10"
+                   BackgroundColor="#16213e">
+                <Entry Placeholder="Пароль" 
+                   Text="{Binding Password}" 
+                   IsPassword="True"
+                   TextColor="White"
+                   PlaceholderColor="Gray"
+                   HeightRequest="50"
+                   Margin="15.0"/>
+            </Frame>
+            <Frame BorderColor="#4a4a6a"
+                   CornerRadius="10"
+                   Padding="10"
+                   BackgroundColor="#16213e">
+                <Entry Placeholder="Підтвердження пароля" 
+                   Text="{Binding ConfirmPassword}" 
+                   IsPassword="True"
+                   TextColor="White"
+                   PlaceholderColor="Gray"
+                   HeightRequest="50"
+                   Margin="15.0"/>
+            </Frame>
+            <Button Text="Зареєструватися" 
+                    Command="{Binding RegisterCommand}"
+                    BackgroundColor="#9d4edd"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="55"
+                    Margin="0,20,0,0"/>
+            <HorizontalStackLayout HorizontalOptions="Center"
+                                   Spacing="5">
+                <Label Text="Вже маєте акаунт? " 
+                       TextColor="White"
+                       FontSize="14"/>
+                <Label Text="Увійти" 
+                       TextColor="#e94560"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToLoginCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
