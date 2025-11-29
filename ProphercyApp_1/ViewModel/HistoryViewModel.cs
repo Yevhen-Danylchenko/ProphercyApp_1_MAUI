@@ -11,6 +11,8 @@ namespace ProphercyApp_1.ViewModel
     public partial class HistoryViewModel: ObservableObject
     {
         private readonly DataService dataService;
+        public IAsyncRelayCommand LoadHistoryAsyncCommand { get; }
+
 
         [ObservableProperty]
         private ObservableCollection<History> historyEntries = new();
@@ -18,6 +20,8 @@ namespace ProphercyApp_1.ViewModel
         public HistoryViewModel()
         {
             dataService = new DataService();
+            LoadHistoryAsyncCommand = new AsyncRelayCommand(LoadHistoryAsync);
+
         }
 
         [RelayCommand]

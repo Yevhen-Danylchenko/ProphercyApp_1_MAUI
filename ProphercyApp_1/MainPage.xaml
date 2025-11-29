@@ -58,7 +58,7 @@
                 Margin="0,20,0,20"/>
 
         <Grid Grid.Row="3" 
-              ColumnDefinitions="*,*"
+              ColumnDefinitions="*,*,*,*"
               ColumnSpacing="10">
             <Button Grid.Column="0"
                     Text="📜 Історія"
@@ -70,6 +70,24 @@
                     CornerRadius="10"
                     HeightRequest="45"/>
             <Button Grid.Column="1"
+                    Text="📜 Реєстрація"
+                    Command="{Binding GoToRegisterPageCommand}"
+                    BackgroundColor="#3f4678"
+                    TextColor="#fff"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="45"/>
+            <Button Grid.Column="2"
+                    Text="📜 Увійти"
+                    Command="{Binding GoToLoginPageCommand}"
+                    BackgroundColor="#3f4678"
+                    TextColor="#fff"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="45"/>
+            <Button Grid.Column="3"
                     Text="🚪 Вийти"
                     Command="{Binding LogoutCommand}"
                     BackgroundColor="#450f61"

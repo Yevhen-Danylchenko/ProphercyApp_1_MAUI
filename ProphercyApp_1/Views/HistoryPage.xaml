@@ -3,34 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:ProphercyApp_1.ViewModel"
              x:Class="ProphercyApp_1.Views.HistoryPage"
-             Title="Історія">
+             Title="📜 Історія"
+             BackgroundColor="#1a1a2e">
+
     <ContentPage.BindingContext>
         <viewmodels:HistoryViewModel/>
     </ContentPage.BindingContext>
 
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+    <Grid RowDefinitions="Auto, *">
+        <!-- Заголовок -->
+        <VerticalStackLayout Grid.Row="0"
+                             Spacing="5"
+                             Margin="0,0,0,20">
             <Label Text="Історія передбачень"
                    FontSize="24"
                    FontAttributes="Bold"
-                   TextColor="#eee"
+                   TextColor="#aaa"
                    HorizontalOptions="Center"/>
-            <CollectionView ItemsSource="{Binding Prophecies}">
+            <Label Text="Тут зберігаються всі твої пророцтва"
+                   FontSize="14"
+                   TextColor="#aaa"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+
+        <!-- Список історії -->
+        <ScrollView Grid.Row="1">
+            <CollectionView ItemsSource="{Binding HistoryEntries}"
+                            Margin="10"
+                            VerticalOptions="FillAndExpand">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="#16213e"
                                BorderColor="#4a4a6a"
-                               CornerRadius="10"
-                               Padding="15"
-                               HasShadow="True">
+                               CornerRadius="15"
+                               Padding="20"
+                               HasShadow="True"
+                               Margin="0,0,0,15">
                             <Label Text="{Binding Text}"
                                    FontSize="16"
                                    TextColor="#eee"
-                                   LineBreakMode="WordWrap"/>
+                                   LineBreakMode="WordWrap"
+                                   HorizontalTextAlignment="Center"/>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </VerticalStackLayout>
-    </ScrollView>
+        </ScrollView>
+    </Grid>
 </ContentPage>

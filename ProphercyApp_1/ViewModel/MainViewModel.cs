@@ -9,12 +9,17 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ProphercyApp_1.ViewModel
 {
     public partial class MainViewModel : ObservableObject
     {
         private readonly DataService dataService;
+        public ICommand RegisterPageCommand { get; }
+
+        public ICommand LoginPageCommand { get; }
+
 
         [ObservableProperty]
         private ObservableCollection<Prophecy> recentProphecies;
@@ -45,7 +50,22 @@ namespace ProphercyApp_1.ViewModel
         {
             dataService = new DataService();
             RecentProphecies = new ObservableCollection<Prophecy>();
-            
+            RegisterPageCommand = new Command(async () => await GoToRegisterPageAsync());
+            LoginPageCommand = new Command(async () => await GoToLoginPageAsync());
+
+        }
+
+        [RelayCommand]
+        private async Task GoToRegisterPageAsync()
+        {
+            // Використовуємо Shell навігацію
+            await Shell.Current.GoToAsync(nameof(RegisterPage));
+        }
+
+        [RelayCommand]
+        private async Task GoToLoginPageAsync()
+        {
+            await Shell.Current.GoToAsync(nameof(LoginPage));
         }
 
         public async Task InitializeAsync()
