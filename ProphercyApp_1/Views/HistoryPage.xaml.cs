@@ -1,4 +1,5 @@
 using ProphercyApp_1.ViewModel;
+using System.Threading.Tasks;
 
 namespace ProphercyApp_1.Views;
 
@@ -9,12 +10,12 @@ public partial class HistoryPage : ContentPage
         InitializeComponent();
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
         if (BindingContext is HistoryViewModel vm)
         {
-            vm.LoadHistoryAsyncCommand.Execute(null);
+            await vm.LoadHistoryAsyncCommand.ExecuteAsync(null);
         }
     }
 

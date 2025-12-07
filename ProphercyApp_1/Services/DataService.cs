@@ -12,12 +12,14 @@ namespace ProphercyApp_1.Services
     {
         private readonly string usersFilePath;
         private readonly string propheciesFilePath;
+        private readonly string historyFilePath;
 
         public DataService()
         {
             var appDataPath = FileSystem.AppDataDirectory;
             usersFilePath = Path.Combine(appDataPath, "users.json");
             propheciesFilePath = Path.Combine(appDataPath, "prophecies.json");
+            historyFilePath = Path.Combine(appDataPath, "history.json");
         }
 
         public async Task SaveUserAsync(List<User> users)
@@ -52,17 +54,20 @@ namespace ProphercyApp_1.Services
             return JsonSerializer.Deserialize<List<Prophecy>>(json) ?? new List<Prophecy>();
         }
 
-        public async Task<List<History>> LoadHistoryAsync()
+        public async Task SaveHistoryAsync(List<History> history)
         {
-            await Task.Delay(200); 
-            return new List<History>
-            {
-                new History { UserEmail = "user@example.com", Text = "Передбачення 1" },
-                new History { UserEmail = "user@example.com", Text = "Передбачення 2" },
-                new History { UserEmail = "other@example.com", Text = "Передбачення іншого користувача" }
-            };
+            var json = JsonSerializer.Serialize(history);
+            await File.WriteAllTextAsync(historyFilePath, json);
         }
 
+        public async Task<List<History>> LoadHistoryAsync()
+        {
+            if (!File.Exists(historyFilePath))
+                return new List<History>();
+
+            var json = await File.ReadAllTextAsync(historyFilePath);
+            return JsonSerializer.Deserialize<List<History>>(json) ?? new List<History>();
+        }
 
     }
 }

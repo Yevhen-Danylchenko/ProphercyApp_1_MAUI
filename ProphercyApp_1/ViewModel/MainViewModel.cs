@@ -101,6 +101,7 @@ namespace ProphercyApp_1.ViewModel
                 RecentProphecies.Add(prophecy);
             }
         }
+
         [RelayCommand]
         private async Task GenerateProphecyAsync()
         {
@@ -115,10 +116,25 @@ namespace ProphercyApp_1.ViewModel
                 UserEmail = Preferences.Get("CurrentUserEmail", string.Empty)
             };
 
+            // --- Збереження у список пророцтв ---
             var allProphecies = await dataService.LoadPropheciesAsync();
             allProphecies.Add(prophecy);
-
             await dataService.SavePropheciesAsync(allProphecies);
+
+            // --- Додатково: збереження у історію ---
+            var email = Preferences.Get("CurrentUserEmail", string.Empty);
+            var history = await dataService.LoadHistoryAsync();
+
+            history.Add(new History
+            {
+                UserEmail = email,
+                Text = prophecy.Text,
+                Date= DateTime.Now
+            });
+
+            await dataService.SaveHistoryAsync(history);
+
+            // --- Оновлення списку останніх пророцтв ---
             await LoadPropheciesAsync();
         }
 
